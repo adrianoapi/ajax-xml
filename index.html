@@ -4,5 +4,20 @@
         <title>Ajax XML</title>
     </head>
     <body>
+        <div id="exempo">
+            <button type="button" onclick="loadXml()">Carregar dados</button>  
+        </div>
+        <script>
+            function loadXml(){
+                var xml = new XMLHttpRequest();
+                xhttp.onreadystagechange = function(){
+                    if(this.readyState == 4 && this.status == 200){
+                        implement(this);
+                    }
+                };
+                xhttp.open("GET", "cd_catalog.xml", true);
+                xhttp.send();
+            }
+        </script>
     </body>
 </html>
