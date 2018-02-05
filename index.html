@@ -2,21 +2,44 @@
 <html>
     <head>
         <title>Ajax XML</title>
+        <style type="text/css">
+            table {
+                border: 1px #00;
+            }
+        </style>
     </head>
     <body>
-        <div id="exempo">
-            <button type="button" onclick="loadXml()">Carregar dados</button>  
-        </div>
+        <div id="exemplo"></div>
+        <button type="button" onclick="loadXml()">Carregar dados</button>  
         <script>
-            function loadXml(){
-                var xml = new XMLHttpRequest();
-                xhttp.onreadystagechange = function(){
-                    if(this.readyState == 4 && this.status == 200){
-                        implement(this);
+            function loadXml() {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        importFunc(this);
                     }
                 };
-                xhttp.open("GET", "cd_catalog.xml", true);
-                xhttp.send();
+                xmlhttp.open("GET", "cd_catalog.xml", true);
+                xmlhttp.send();
+            }
+
+            function importFunc(xml) {
+                var i;
+                var xmlDoc = xml.responseXML;
+                var html = "<table>" +
+                        "<tr>" +
+                        "<th>Artist</th>" +
+                        "<th>Title</th>" +
+                        "</tr>";
+                var x = xmlDoc.getElementsByTagName("CD");
+                for (i = 0; i < x.length; i++) {
+                    html += "" +
+                            "<tr>" +
+                            "<td>" + x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue + "</td>" +
+                            "<td>" + x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue + "</td>" +
+                            "</tr>";
+                }
+                document.getElementById("exemplo").innerHTML = html + "</table>";
             }
         </script>
     </body>
