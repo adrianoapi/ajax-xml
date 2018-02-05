@@ -3,14 +3,41 @@
     <head>
         <title>Ajax XML</title>
         <style type="text/css">
-            table {
-                border: 1px #00;
+            table.table-style-two {
+                font-family: verdana, arial, sans-serif;
+                font-size: 11px;
+                color: #333333;
+                border-width: 1px;
+                border-color: #3A3A3A;
+                border-collapse: collapse;
+            }
+
+            table.table-style-two th {
+                border-width: 1px;
+                padding: 8px;
+                border-style: solid;
+                border-color: #517994;
+                background-color: #B2CFD8;
+            }
+
+            table.table-style-two tr:hover td {
+                background-color: #DFEBF1;
+            }
+
+            table.table-style-two td {
+                border-width: 1px;
+                padding: 8px;
+                border-style: solid;
+                border-color: #517994;
+                background-color: #ffffff;
             }
         </style>
     </head>
     <body>
-        <div id="exemplo"></div>
         <button type="button" onclick="loadXml()">Carregar dados</button>  
+        <button type="button" onclick="limpar()">Limpar</button> 
+        <hr>
+        <div id="exemplo"></div>
         <script>
             function loadXml() {
                 var xmlhttp = new XMLHttpRequest();
@@ -26,7 +53,7 @@
             function importFunc(xml) {
                 var i;
                 var xmlDoc = xml.responseXML;
-                var html = "<table>" +
+                var html = "<table class=\"table-style-two\">" +
                         "<tr>" +
                         "<th>Artist</th>" +
                         "<th>Title</th>" +
@@ -40,6 +67,10 @@
                             "</tr>";
                 }
                 document.getElementById("exemplo").innerHTML = html + "</table>";
+            }
+
+            function limpar() {
+                document.getElementById("exemplo").innerHTML = "";
             }
         </script>
     </body>
