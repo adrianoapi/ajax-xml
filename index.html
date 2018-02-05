@@ -39,6 +39,9 @@
         <hr>
         <div id="exemplo"></div>
         <script>
+            /*
+             * Carrega o arquivo XML e importa a estrutura
+             */
             function loadXml() {
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function () {
@@ -50,6 +53,9 @@
                 xmlhttp.send();
             }
 
+            /*
+             * Navega pela estrutura do XML e monta a tabela
+             */
             function importFunc(xml) {
                 var i;
                 var xmlDoc = xml.responseXML;
@@ -58,6 +64,7 @@
                         "<th>Artist</th>" +
                         "<th>Title</th>" +
                         "</tr>";
+                var count;
                 var x = xmlDoc.getElementsByTagName("CD");
                 for (i = 0; i < x.length; i++) {
                     html += "" +
@@ -65,10 +72,15 @@
                             "<td>" + x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue + "</td>" +
                             "<td>" + x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue + "</td>" +
                             "</tr>";
+                    count = i;
                 }
+                html += "<tr><td colspan=\"2\">Resultado " + count + "</td></tr>";
                 document.getElementById("exemplo").innerHTML = html + "</table>";
             }
 
+            /*
+             * Limpa a div
+             */
             function limpar() {
                 document.getElementById("exemplo").innerHTML = "";
             }
